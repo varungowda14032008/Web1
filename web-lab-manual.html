@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Technology Lab Manual – CS1309 | RV University</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--tx:#1a2233;--mu:#5b6578;--ac:#0a58ca;--bd:#dde3ec;--cb:#0f172a;--cf:#e2e8f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#161e2e;--tx:#e6ebf4;--mu:#9aa6bb;--ac:#6ea8fe;--bd:#273247;--cb:#070b13}}
+:root[data-theme="dark"]{--bg:#0e1420;--card:#161e2e;--tx:#e6ebf4;--mu:#9aa6bb;--ac:#6ea8fe;--bd:#273247;--cb:#070b13}
+*{box-sizing:border-box}html{scroll-padding-top:70px;height:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:12px;padding:10px 16px}
+header.top b{color:var(--ac)}header.top span{color:var(--mu);font-size:14px}
+#menu{display:none}#demoBtn{margin-left:auto}#demo{display:none;position:absolute;top:100%;right:12px;width:min(92vw,420px);max-height:75vh;overflow:auto;background:var(--card);border:1px solid var(--bd);border-radius:0 0 12px 12px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,.18)}#demo.open{display:block}#demo h3{margin:6px 0}#demo input[type=text]{font:inherit;padding:6px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);width:100%}#demo p{color:var(--ac);min-height:1.4em;margin:6px 0}button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;padding:6px 12px}
+.wrap{display:flex;max-width:1200px;margin:auto}
+nav.side{width:250px;flex:none;position:sticky;top:60px;align-self:flex-start;max-height:calc(100vh - 70px);overflow:auto;padding:16px}
+nav.side a{display:block;padding:5px 10px;border-radius:6px;color:var(--mu);text-decoration:none;font-size:14px}
+nav.side a:hover{background:var(--bd);color:var(--tx)}nav.side h4{margin:14px 10px 4px;font-size:11px;text-transform:uppercase;color:var(--mu);letter-spacing:.08em}
+main{flex:1;min-width:0;padding:16px 20px 60px}
+section{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:22px 24px;margin-bottom:20px}
+h1,h2,h3{line-height:1.25}h2{margin-top:0;color:var(--ac)}h3{margin-bottom:4px}
+.cover{text-align:center;padding:40px 20px}.cover h1{font-size:2rem;margin:8px 0}.logo{font-size:2.2rem;font-weight:800;letter-spacing:.04em}
+.tag{display:inline-block;background:var(--ac);color:#fff;border-radius:20px;padding:2px 12px;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--bd)}
+.scroll{overflow-x:auto}pre{background:var(--cb);color:var(--cf);padding:14px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.5;margin:8px 0}
+.cap{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-top:14px}
+.rub{border-top:1px dashed var(--bd);margin-top:16px;padding-top:10px;color:var(--mu);font-size:13px}
+.sig{display:flex;justify-content:space-between;gap:10px;margin-top:30px;font-size:14px;color:var(--mu);flex-wrap:wrap}
+.pg{float:right;color:var(--mu);font-size:12px}
+@media(max-width:820px){#menu{display:block}nav.side{display:none;position:fixed;inset:60px 0 0 0;max-height:none;background:var(--card);z-index:4;width:auto}nav.side.open{display:block}main{padding:12px}}
+</style></head><body>
+<header class="top"><div><b>RV University</b> <span>· Web Technology CS1309</span></div><button id="demoBtn">⚡ Event Handling Demo</button><button id="menu">☰ Contents</button>
+<div id="demo"><strong>JavaScript Event Handling</strong><hr>
+<h3>Button Click Event</h3><button id="clickButton">Click Me</button><p id="buttonMessage"></p><hr>
+<h3>Form Submission Event</h3><form id="studentForm"><label>Name:</label> <input type="text" id="studentName" required><br><br><input type="submit" value="Submit"></form><p id="formMessage"></p><hr>
+<h3>Keyboard Event</h3><input type="text" id="keyboardInput" placeholder="Type something here"><p id="keyboardMessage"></p></div></header>
+<div class="wrap">
+<nav class="side" id="side"></nav>
+<main>
+
+<section id="cover" class="cover" data-t="Cover" data-g="Front matter">
+<div class="logo">RV UNIVERSITY</div><div style="color:var(--mu)"><i>Go, change the world</i> · an initiative of RV Educational Institutions</div>
+<p style="color:var(--mu);font-size:13px">RV University, Mysuru Campus – Plot No. 46, 47, 60 &amp; 61(P), KIADB Industrial Area, Kallahally Village, Kasaba Hobli, Nanjangud Taluk, Mysuru, Karnataka – 571302</p>
+<h3>School of Engineering (SoE)</h3><p>Bachelor of Technology (Honors) in Computer Science and Engineering</p>
+<h1>Web Technology – CS1309</h1><span class="tag">LABORATORY MANUAL</span><p>1st Semester (2026-2027)</p>
+<div class="scroll"><table><tr><td>Name of the Student</td><td></td><td>University Seat Number</td><td></td></tr><tr><td>Section</td><td></td><td>Name of the Lab Incharge</td><td></td></tr></table></div>
+</section>
+
+<section id="dos" data-t="Do's and Don'ts" data-g="Front matter"><h2>Do's and Don'ts in the Laboratory</h2><ul>
+<li>Come in the proper dress code prescribed by the college.</li><li>Come with complete preparation (Lab Manual, Laptop, etc.). Bags are not allowed inside the Lab.</li>
+<li>Check that lab components are in working condition before and after experiments.</li><li>Take care of devices and systems; damage due to misuse shall be borne by the students.</li>
+<li>Read the theory well in advance and understand the working principle before conducting the experiment.</li><li>Come prepared for viva-voce.</li><li>Follow the given procedure in the same sequence.</li><li>Handle the equipment with care.</li>
+<li>Check systems for correctness before the experiments. Don't switch on the power supply while making connections.</li></ul></section>
+
+<section id="cert" data-t="Laboratory Certificate" data-g="Front matter"><h2>Laboratory Certificate</h2>
+<p>This is to certify that Mr./Ms. ………………………………… USN: ………………… has satisfactorily completed the course of experiments in “Web Technology” having the course code CS1309 as prescribed by RV University for the B.Tech.(H) Course in “Computer Science and Engineering” for the academic year 2026-27.</p>
+<p>Date of Practical Examination: ………………………… &nbsp; Marks: Maximum ______ Obtained ______</p>
+<div class="sig"><span>Signature of the Student</span><span>Signature of Lab In-charge</span><span>Date / Dean, SOE, Mysuru</span></div></section>
+
+<section id="vm" data-t="Vision, Mission &amp; POs" data-g="Front matter"><h2>Vision, Mission and Program Outcomes</h2>
+<h3>RV University – Vision</h3><p>To be a world-class, tech-driven, global university for liberal education, empowering citizens of tomorrow.</p>
+<h3>RVU Mission</h3><ul><li><b>M1:</b> Strive for excellence in teaching, research, capacity building and community engagement, benchmarking against global universities.</li><li><b>M2:</b> Utilize digital and emerging technologies to enhance teaching, learning and research, accessible to all, in a multidisciplinary, inclusive environment.</li><li><b>M3:</b> Cultivate a diverse, global academic community through national and international collaborations.</li></ul>
+<h3>School of Engineering – Vision</h3><p>To be a pioneering School of Engineering committed to fostering technical liberal education and empowering the next generation of technologists to create a positive global socio-economic impact.</p>
+<h3>SoE Mission</h3><ul><li><b>M1:</b> Pioneer in engineering education through multidisciplinary learning, research excellence, innovation and entrepreneurship.</li><li><b>M2:</b> State-of-the-art infrastructure and an industry-aligned curriculum integrating advanced technologies, strong theory and hands-on practice.</li><li><b>M3:</b> A diverse, inclusive ecosystem through collaborations with academia, industry and research organizations.</li><li><b>M4:</b> Cultivate ethical, self-motivated, socially responsible and empathetic engineers committed to innovation, lifelong learning and the SDGs.</li></ul>
+<h3>Program Outcomes (POs)</h3><div class="scroll"><table><tr><th>PO</th><th>Title</th><th>Summary</th></tr>
+<tr><td>PO1</td><td>Application of Knowledge</td><td>Apply core/interdisciplinary knowledge to solve complex real-world problems.</td></tr>
+<tr><td>PO2</td><td>Critical Thinking &amp; Creativity</td><td>Analyze and evaluate situations to develop innovative multi-perspective solutions.</td></tr>
+<tr><td>PO3</td><td>Research &amp; Innovation</td><td>Observation and enquiry using appropriate methodology to develop new ideas and solutions.</td></tr>
+<tr><td>PO4</td><td>Digital Transformation</td><td>Confident, critical and responsible use of digital technologies.</td></tr>
+<tr><td>PO5</td><td>Communication &amp; Interpersonal Skills</td><td>Express thoughts effectively, orally and in writing.</td></tr>
+<tr><td>PO6</td><td>Leadership &amp; Teamwork</td><td>Set goals and guide people to build a team that achieves them.</td></tr>
+<tr><td>PO7</td><td>Project Mgmt &amp; Entrepreneurial Mindset</td><td>Time management, resource allocation and risk assessment to create value.</td></tr>
+<tr><td>PO8</td><td>Lifelong Learning</td><td>Self-directed learning to adapt to evolving technologies and challenges.</td></tr>
+<tr><td>PO9</td><td>Global Perspective &amp; Cultural Awareness</td><td>Knowledge of diverse cultures and values; engage with empathy.</td></tr>
+<tr><td>PO10</td><td>Ethical Reasoning &amp; Social Responsibility</td><td>Moral, value-based principles; socially conscious and accountable.</td></tr>
+<tr><td>PO11</td><td>Civic Engagement &amp; Community Service</td><td>Active civic life, community service, social justice, common good.</td></tr>
+<tr><td>PO12</td><td>Environmental Sustainability</td><td>Work towards achieving the Sustainable Development Goals.</td></tr></table></div></section>
+
+<section id="guide" data-t="General Guidelines" data-g="Course info"><h2>General Guidelines</h2>
+<h3>Objectives of the Lab</h3><ul><li>Understand and implement fundamentals of HTML, CSS, JavaScript and modern web technologies.</li><li>Design and develop responsive, interactive web pages and applications.</li><li>Implement client-side scripting, DOM manipulation, events, forms and validation.</li><li>Design and implement open-ended web applications using concepts learned.</li></ul>
+<h3>Structure of Experiments</h3><p>First group: HTML and CSS pages. Second group: JavaScript interactive applications. Subsequent experiments cover Bootstrap, React and other modern concepts. The final open-ended experiment is a complete web application built without direct faculty assistance; its problem statement is not in the manual.</p>
+<h3>General Lab Information</h3><ul><li>Lab manuals/data sheets are the primary source for continuous evaluation; fill them in and number pages properly.</li><li>Students may work in a batch, but each must individually explain the objective, algorithm, code and working.</li><li>Maintain additional notes (details, observations, errors, corrections); these may be evaluated.</li><li>Remain in the lab until the end of the 2-hour session.</li></ul>
+<p><b>Note:</b> Prepare before each lab. Within the first 30 minutes, independently write the aim, requirements, algorithm/steps, basic code structure and expected output in the data sheet.</p></section>
+
+<section id="syl" data-t="Course Syllabus" data-g="Course info"><h2>Course Syllabus – Semester I</h2>
+<div class="scroll"><table><tr><td>Course</td><td>Web Technology (CS1309)</td><td>Program</td><td>B.Tech. (Hons) CS&amp;E, Major (Core)</td></tr><tr><td>Credits (L:T:P)</td><td>3 (1:1:2)</td><td>Hours</td><td>15L + 15T + 30P = 60</td></tr><tr><td>CIE Marks</td><td>70</td><td>SEE Marks / Mode</td><td>30 / Jury</td></tr></table></div>
+<h3>Course Objectives</h3><ol><li>Fundamentals of web development; HTML for structured pages with tables and forms.</li><li>CSS for styling, layouts, text formatting and responsive design.</li><li>JavaScript and React for interactive apps, DOM manipulation and components.</li><li>Responsive, user-friendly interfaces with Bootstrap and basic UI/UX principles.</li></ol>
+<h3>Modules</h3><ul><li><b>Module 1 – Intro to Web Development and HTML (3 h):</b> Static vs dynamic websites, front-end, back-end, full stack, Internet basics, HTML syntax, semantic markup, document structure, elements, tables and forms.</li>
+<li><b>Module 2 – CSS Basics (2 h):</b> Syntax, location of styles, selectors, text styling, font, background, border.</li>
+<li><b>Module 3 – CSS Advanced (2 h):</b> The cascade, links, tables, forms, box model, images, responsive images, layouts, specificity, units.</li>
+<li><b>Module 4 – JavaScript and React (6 h):</b> Functions, arrays, objects, ES6 (arrow functions, destructuring, spread), DOM and events, components, JSX, props, state, hooks (useState, useEffect), React Router.</li>
+<li><b>Module 5 – Bootstrap and UI/UX (2 h):</b> Grid, responsive design, components, forms, buttons, navigation, cards, modals, carousel, overview of Figma.</li></ul>
+<h3>Course Outcomes</h3><ol><li>Build structured web pages with HTML including tables and forms.</li><li>Apply CSS for appealing, well-structured, responsive designs.</li><li>Develop interactive apps with JavaScript and React (events, DOM, components).</li><li>Design responsive apps with Bootstrap and intuitive UI/UX with tools like Figma.</li></ol>
+<h3>Text Books</h3><ol><li>J. Robbins, <i>Learning Web Design</i>, 5th ed., O’Reilly, 2018.</li><li>Z. Ruvalcaba &amp; A. Delamater, <i>Murach’s HTML and CSS</i>, 6th ed., 2024.</li><li>A. Banks &amp; E. Porcello, <i>Learning React</i>, 3rd ed., O’Reilly, 2023.</li><li>M. Haverbeke, <i>Eloquent JavaScript</i>, 4th ed., No Starch Press, 2024.</li><li>D. Flanagan, <i>JavaScript: The Definitive Guide</i>, 7th ed., O’Reilly, 2020.</li><li>S. Krug, <i>Don’t Make Me Think, Revisited</i>, 3rd ed., New Riders, 2014.</li></ol>
+<h3>CO vs PO Mapping</h3><div class="scroll"><table><tr><th>CO\PO</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
+<tr><td>CO1</td><td>3</td><td>1</td><td>-</td><td>3</td><td>2</td><td>-</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>CO2</td><td>3</td><td>2</td><td>1</td><td>3</td><td>2</td><td>-</td><td>1</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>CO3</td><td>3</td><td>3</td><td>2</td><td>3</td><td>1</td><td>1</td><td>2</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>CO4</td><td>2</td><td>3</td><td>2</td><td>3</td><td>3</td><td>1</td><td>2</td><td>2</td><td>1</td><td>1</td><td>-</td><td>-</td></tr></table></div></section>
+
+<section id="rub" data-t="Evaluation Rubrics" data-g="Course info"><h2>Evaluation Rubrics</h2><h3>Lab Write-up and Execution (Max 25 marks incl. viva)</h3>
+<div class="scroll"><table><tr><th>Criteria</th><th>Excellent</th><th>Good</th><th>Poor</th><th>Marks</th></tr>
+<tr><td>A. Program / Script Design</td><td>Logically correct, well structured, clearly presented (5–4)</td><td>Mostly correct, minor issues (3–2)</td><td>Major errors/incomplete, needs guidance (2–1)</td><td>5</td></tr>
+<tr><td>B. Procedure / Documentation</td><td>Complete, clear, accurate (5–4)</td><td>Mostly complete, minor omissions (3–2)</td><td>Incomplete, unclear or inaccurate (2–1)</td><td>5</td></tr>
+<tr><td>C. Execution</td><td>Executes correctly with stable, expected results (5–4)</td><td>Minor corrections needed (3–2)</td><td>Inconsistent, needs significant guidance (2–1)</td><td>5</td></tr>
+<tr><td>D. Analysis of Results</td><td>Outputs match; correctly interpreted (5–4)</td><td>Mostly match; minor gaps (3–2)</td><td>Errors/inconsistencies, poor interpretation (2–1)</td><td>5</td></tr>
+<tr><td>E. Conceptual Understanding (Viva)</td><td>Explains thoroughly (3)</td><td>Adequate (2–1)</td><td>Unable to explain (0)</td><td>3</td></tr>
+<tr><td>F. Communication (Viva)</td><td>Clearly communicates (2)</td><td>Sufficiently (1)</td><td>Unable (0)</td><td>2</td></tr></table></div></section>
+
+<section id="toc" data-t="Experiment Index" data-g="Course info"><h2>Lab Experiments – CO and BT Mapping</h2>
+<div class="scroll"><table><tr><th>Ex.</th><th>Description</th><th>CO</th><th>BT</th><th>Page</th></tr>
+<tr><td>1</td><td>Simple web page: headings, paragraphs, lists, links, images</td><td>1</td><td>3</td><td>10</td></tr>
+<tr><td>2</td><td>Layout with semantic tags (header, footer, section, nav)</td><td>1</td><td>3</td><td>10</td></tr>
+<tr><td>3</td><td>Style a page with CSS: colors, fonts, backgrounds, layout</td><td>2</td><td>3</td><td>17</td></tr>
+<tr><td>4</td><td>Responsive layout with Flexbox or Grid</td><td>3</td><td>3</td><td>27</td></tr>
+<tr><td>5</td><td>JavaScript: variables, data types, operators, functions</td><td>4</td><td>3</td><td>35</td></tr>
+<tr><td>6</td><td>Event handling: clicks, form submission, keyboard</td><td>4</td><td>3</td><td>40</td></tr>
+<tr><td>7</td><td>DOM manipulation: content, styles, elements</td><td>4</td><td>3</td><td>45</td></tr>
+<tr><td>8</td><td>Form validation with JavaScript</td><td>4</td><td>4</td><td>50</td></tr>
+<tr><td>9</td><td>Interactive project (calculator / to-do list)</td><td>4</td><td>4</td><td>55</td></tr>
+<tr><td>10</td><td>Basic React app with JSX and functional components</td><td>4</td><td>4</td><td>59</td></tr>
+<tr><td>11</td><td>Props, state, hooks (useState, useEffect)</td><td>4</td><td>4</td><td>63</td></tr>
+<tr><td>12</td><td>React with routing + responsive Bootstrap UI</td><td>5</td><td>4</td><td>69</td></tr>
+<tr><td>Part B</td><td>Mini Project</td><td>5</td><td>4</td><td>73</td></tr></table></div>
+<h3>Particulars of Experiments Performed</h3><p>Class: I Semester · CIE Max 25 · Year 2026-2027 · SEE Max 30 · Subject Code CS1309. Record per experiment: date, name, page numbers, marks, staff signature. Final: (a) average of all experiment marks (max 25) + (b) test marks (max 25) = Grand Total; signed by Lab In-charge.</p></section>
+
+<div id="exps"></div>
+
+<section id="mini" data-t="Part B: Mini Project" data-g="Mini Project"><h2>Part B: Mini Project</h2>
+<p>Create a website that effectively integrates and demonstrates comprehension and application of the topics covered. All key concepts from the course must be clearly exhibited. The website should be functional and user-friendly.</p>
+<div class="rub">Rubrics: A (5) B (5) C (5) D (5) · Viva E (3) F (2) · Total 25 · Signature of the Lab In-charge</div></section>
+</main></div>
+
+<!-- ============ EXPERIMENT DATA (code kept in textareas, no escaping needed) ============ -->
+<textarea hidden id="c1">&lt;!-- placeholder --&gt;</textarea>
+<div id="src" hidden>
+<div data-ex="1 &amp; 2" data-title="Create a Simple Web Page Using HTML and Semantic Elements" data-pg="10">
+<p class="aim">To create a simple web page using HTML with headings, paragraphs, lists, hyperlinks and images, laying it out with semantic elements: header, nav, main, section, article, aside and footer.</p>
+<p class="th">HTML (HyperText Markup Language) is the standard markup language for structuring web pages using elements and tags. Semantic elements (header, nav, main, section, article, aside, footer) describe the purpose of each part of a page.</p>
+<ol class="st"><li>Start with &lt;!DOCTYPE html&gt;.</li><li>Create &lt;head&gt; with meta tags and title.</li><li>Create a &lt;header&gt; with the site title.</li><li>Create a &lt;nav&gt; with links.</li><li>Create &lt;main&gt;.</li><li>Add a &lt;section&gt; describing HTML.</li><li>Add a &lt;section&gt; with ordered and unordered lists.</li><li>Add an &lt;article&gt;.</li><li>Add an &lt;aside&gt; for resources.</li><li>Insert an image with &lt;img&gt;.</li><li>Add hyperlinks with &lt;a&gt;.</li><li>Finish with a &lt;footer&gt;.</li><li>Save and open in a browser.</li></ol>
+<textarea class="code"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Lab 1</title>
+</head>
+<body>
+<header>
+  <h1>Welcome to HTML Programming</h1>
+  <p>Learning the basics of HTML using semantic elements.</p>
+</header><hr>
+<nav>
+  <a href="#">Home</a> | <a href="#">About</a> | <a href="#">Courses</a> |
+  <a href="#">Gallery</a> | <a href="#">Contact</a>
+</nav><hr>
+<main>
+  <section>
+    <h2>What is HTML?</h2>
+    <p>HTML stands for HyperText Markup Language. It is the standard language used to create web pages.</p>
+  </section><hr>
+  <section>
+    <h2>Features of HTML</h2>
+    <ul>
+      <li>Simple and Easy to Learn</li><li>Platform Independent</li>
+      <li>Supports Images, Audio and Video</li><li>Works with CSS and JavaScript</li>
+      <li>Free and Open Standard</li>
+    </ul>
+  </section><hr>
+  <section>
+    <h2>Steps to Learn HTML</h2>
+    <ol><li>Learn HTML Tags</li><li>Create Simple Web Pages</li><li>Use Images and Links</li>
+        <li>Learn Semantic Elements</li><li>Combine HTML with CSS</li></ol>
+  </section><hr>
+  <article>
+    <h2>Why Learn HTML?</h2>
+    <p>HTML is the foundation of web development. Every website starts with HTML.</p>
+  </article><hr>
+  <section>
+    <h2>HTML Logo</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML Logo" width="250">
+  </section><hr>
+  <section>
+    <h2>Useful Learning Resources</h2>
+    <ul>
+      <li><a href="https://www.w3schools.com" target="_blank">W3Schools</a></li>
+      <li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></li>
+    </ul>
+  </section><hr>
+  <aside><h3>Did You Know?</h3><p>HTML was first proposed by Tim Berners-Lee in 1991.</p></aside>
+</main><hr>
+<footer>
+  <p>&copy; 2026 HTML Laboratory | School of Computer Science and Engineering</p>
+  <p>Email: html.lab@example.com</p>
+</footer>
+</body>
+</html></textarea>
+<p class="out">A page titled “Welcome to HTML Programming” with header, navigation menu, HTML description, ordered/unordered lists, article, HTML logo, resource hyperlinks, aside and footer.</p>
+<p class="ap">College/university websites, personal portfolios, news and blog sites, documentation sites, accessible and SEO-friendly pages.</p></div>
+
+<div data-ex="3" data-title="Apply CSS to Style a Web Page" data-pg="17">
+<p class="aim">To apply CSS to an HTML page using colors, fonts, backgrounds, borders, spacing and basic layout techniques.</p>
+<p class="th">CSS (Cascading Style Sheets) controls presentation. It can be applied as <b>Inline CSS</b> (style attribute), <b>Internal CSS</b> (&lt;style&gt; in head) or <b>External CSS</b> (separate .css file linked with &lt;link&gt;).</p>
+<ol class="st"><li>Create an HTML page.</li><li>Apply inline CSS.</li><li>Create an internal stylesheet.</li><li>Create style.css and link it with &lt;link rel="stylesheet"&gt;.</li><li>Apply color, background, font-family, padding, margin, border, text-align.</li><li>Save and open in a browser; observe each method.</li></ol>
+<div class="cap">Part 1 – Inline CSS (excerpt; Part 2 uses the same rules inside &lt;style&gt;)</div>
+<textarea class="code"><body style="background-color:#f5f5f5; font-family:Arial;">
+<header style="background-color:steelblue; color:white; padding:20px; text-align:center;">
+  <h1>Welcome to HTML and CSS</h1><p>Inline CSS Example</p>
+</header>
+<nav style="background-color:#333; padding:15px;">
+  <a href="#" style="color:white; text-decoration:none; margin-right:20px;">Home</a>
+  <a href="#" style="color:white; text-decoration:none; margin-right:20px;">About</a>
+  <a href="#" style="color:white; text-decoration:none;">Contact</a>
+</nav>
+<section style="padding:20px;">
+  <h2 style="color:darkblue;">What is CSS?</h2>
+  <p style="font-size:18px; line-height:1.6;">CSS stands for Cascading Style Sheets. It is used to style HTML webpages.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+       width="150" style="border:3px solid black; padding:10px;">
+</section>
+<footer style="background-color:black; color:white; text-align:center; padding:15px;">HTML &amp; CSS Lab</footer>
+</body></textarea>
+<div class="cap">Part 3 – External CSS: HTML (head) and style.css</div>
+<textarea class="code"><link rel="stylesheet" href="style.css">
+...
+<header><h1>Welcome to External CSS</h1><p>Styling using an external stylesheet</p></header>
+<nav><a href="#">Home</a><a href="#">Courses</a><a href="#">Gallery</a><a href="#">Contact</a></nav>
+<main><section><h2>External CSS</h2>
+  <p>External CSS separates presentation from content. It improves maintainability and code reusability.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg">
+</section></main>
+<footer>Designed using External CSS</footer>
+
+/* style.css */
+body{background-color:#eef2f7;font-family:Arial,sans-serif;margin:0;}
+header{background:#0066cc;color:white;text-align:center;padding:20px;}
+nav{background:#222;padding:15px;text-align:center;}
+nav a{color:white;text-decoration:none;margin:20px;font-weight:bold;}
+nav a:hover{color:yellow;}
+main{padding:20px;}
+section{background:white;padding:20px;border-radius:8px;}
+h2{color:#0066cc;}
+p{font-size:18px;line-height:1.6;}
+img{width:180px;border:4px solid #0066cc;padding:10px;margin-top:15px;}
+footer{background:#111;color:white;text-align:center;padding:15px;margin-top:20px;}</textarea>
+<p class="out">Styled header, navigation bar, colored headings and paragraphs, bordered CSS logo, proper spacing and alignment, styled footer.</p>
+<p class="ap">Attractive websites, consistent layouts, better readability and UX, reusable styles, maintaining large sites with external stylesheets.</p></div>
+
+<div data-ex="4" data-title="Design a Responsive Layout Using CSS Flexbox" data-pg="27">
+<p class="aim">To design a responsive web page layout using CSS Flexbox that adjusts automatically to different screen sizes.</p>
+<p class="th">Flexbox is a one-dimensional layout model. Key properties: <code>display:flex</code>, <code>flex-wrap:wrap</code>, <code>justify-content</code>, <code>flex-direction</code>, <code>gap</code>. A media query switches the cards to a column below 768px.</p>
+<ol class="st"><li>Create an HTML document and link flexstyle.css.</li><li>Add header and navigation.</li><li>Create a flex container with several cards.</li><li>Use display:flex, flex-wrap, justify-content.</li><li>Add a media query for small screens.</li><li>Save and open in a browser.</li></ol>
+<textarea class="code"><!-- HTML (body) -->
+<header><h1>Responsive Flexbox Layout</h1><p>HTML and CSS Laboratory</p></header>
+<nav><a href="#">Home</a><a href="#">Courses</a><a href="#">Gallery</a><a href="#">Contact</a></nav>
+<main>
+  <h2>Available Courses</h2>
+  <div class="container">
+    <div class="card"><h3>HTML</h3><p>Learn the fundamentals of web page development using HTML.</p></div>
+    <div class="card"><h3>CSS</h3><p>Style webpages using colors, fonts, layouts, and animations.</p></div>
+    <div class="card"><h3>JavaScript</h3><p>Add interactivity and dynamic content to web applications.</p></div>
+    <div class="card"><h3>Bootstrap</h3><p>Develop responsive websites using Bootstrap components.</p></div>
+    <div class="card"><h3>React</h3><p>Build modern single-page applications using React.</p></div>
+    <div class="card"><h3>Node.js</h3><p>Create backend applications using JavaScript.</p></div>
+  </div>
+</main>
+<footer><p>© 2026 School of Computer Science and Engineering</p></footer>
+
+/* flexstyle.css */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background-color:#f4f4f4;}
+header{background-color:#0066cc;color:white;text-align:center;padding:25px;}
+nav{background-color:#333;text-align:center;padding:15px;}
+nav a{color:white;text-decoration:none;margin:20px;font-weight:bold;}
+nav a:hover{color:yellow;}
+main{padding:30px;}
+main h2{text-align:center;margin-bottom:30px;}
+.container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.card{background:white;width:300px;padding:20px;border-radius:10px;
+      box-shadow:0px 4px 8px rgba(0,0,0,0.2);text-align:center;transition:0.3s;}
+.card:hover{transform:scale(1.05);}
+footer{background:#222;color:white;text-align:center;padding:20px;margin-top:30px;}
+@media screen and (max-width:768px){
+  .container{flex-direction:column;align-items:center;}
+  nav a{display:block;margin:10px;}
+}</textarea>
+<p class="out">Six cards (HTML, CSS, JavaScript, Bootstrap, React, Node.js): in rows on desktop, stacked vertically on small screens.</p>
+<p class="ap">Responsive websites, course/product cards, portfolios, e-commerce, dashboards, mobile-friendly pages.</p></div>
+
+<div data-ex="5" data-title="JavaScript Basics – Variables, Data Types, Operators, Functions" data-pg="35">
+<p class="aim">To write a JavaScript program demonstrating variables, data types, operators and basic functions.</p>
+<p class="th">Variables are declared with <code>let</code>, <code>const</code> or <code>var</code>. Data types: Number, Boolean, String, Null, Undefined. Operators: arithmetic (+ - * / %), comparison (&gt; &lt; &gt;= &lt;= == !=), logical (&amp;&amp; || !). Functions are reusable blocks that may or may not return a value.</p>
+<ol class="st"><li>Declare variables with let, const, var.</li><li>Store different data types.</li><li>Perform arithmetic operations.</li><li>Demonstrate comparison operators.</li><li>Demonstrate logical operators.</li><li>Create a user-defined function.</li><li>Call it and display the result.</li><li>Run with Node.js or the browser console.</li></ol>
+<textarea class="code">let studentName = "Rakesh";
+const college = "ABC Engineering College";
+var age = 20;
+console.log("Student Name :", studentName);
+console.log("College :", college);
+console.log("Age :", age);
+
+// Data types
+let marks = 95;            // Number
+let percentage = 92.75;    // Decimal
+let passed = true;         // Boolean
+let city = "Bangalore";    // String
+let address = null;        // Null
+let phone;                 // Undefined
+console.log("\n----- Data Types -----");
+console.log("Marks :", marks, "| Percentage :", percentage, "| Passed :", passed);
+console.log("City :", city, "| Address :", address, "| Phone :", phone);
+
+// Arithmetic
+let a = 20, b = 10;
+console.log("\n----- Arithmetic Operators -----");
+console.log("Addition :", a + b);  console.log("Subtraction :", a - b);
+console.log("Multiplication :", a * b);  console.log("Division :", a / b);
+console.log("Modulus :", a % b);
+
+// Comparison
+console.log("\n----- Comparison Operators -----");
+console.log("a > b :", a > b);  console.log("a < b :", a < b);
+console.log("a >= b :", a >= b);  console.log("a <= b :", a <= b);
+console.log("a == b :", a == b);  console.log("a != b :", a != b);
+
+// Logical
+let x = true, y = false;
+console.log("\n----- Logical Operators -----");
+console.log("x && y :", x && y);  console.log("x || y :", x || y);  console.log("!x :", !x);
+
+// Functions
+function greet(name) { console.log("\nWelcome " + name + " to JavaScript Programming"); }
+greet("Student");
+function addNumbers(num1, num2) { return num1 + num2; }
+let result = addNumbers(25, 35);
+console.log("\nResult of Addition :", result);</textarea>
+<p class="out">Student Name : Rakesh · College : ABC Engineering College · Age : 20 · Marks 95 · Percentage 92.75 · Passed true · City Bangalore · Address null · Phone undefined · Addition 30 · Subtraction 10 · Multiplication 200 · Division 2 · Modulus 0</p>
+<p class="ap">Mathematical calculations, data processing, form processing, business logic, interactive web applications.</p></div>
+
+<div data-ex="6" data-title="JavaScript Event Handling" data-pg="40">
+<p class="aim">To implement JavaScript event handling for button clicks, form submission and keyboard events.</p>
+<p class="th">An event is an action on a page (click, submit, key press). <code>addEventListener()</code> attaches a handler to an element. This program uses the <b>click</b>, <b>submit</b> and <b>keyup</b> events; <code>preventDefault()</code> stops the default form submission.</p>
+<ol class="st"><li>Create an HTML page with a button, a form with input, and a text box.</li><li>Create an external JavaScript file.</li><li>Implement click, submit and keyup handlers.</li><li>Display a message for each event.</li><li>Run in a browser.</li></ol>
+<div class="cap">eventhandling.html</div><textarea class="code"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Event Handling</title>
+</head>
+<body>
+<h1>JavaScript Event Handling</h1>
+<hr>
+
+<!-- Button Click Event -->
+<h2>Button Click Event</h2>
+<button id="clickButton">
+Click Me
+</button>
+<p id="buttonMessage"></p>
+<hr>
+
+<!-- Form Submission Event -->
+<h2>Form Submission Event</h2>
+<form id="studentForm">
+<label>Name:</label>
+<input type="text"
+id="studentName"
+required>
+<br><br>
+<input type="submit"
+value="Submit">
+</form>
+<p id="formMessage"></p>
+<hr>
+
+<!-- Keyboard Event -->
+<h2>Keyboard Event</h2>
+<input type="text"
+id="keyboardInput"
+placeholder="Type something here">
+<p id="keyboardMessage"></p>
+
+<script src="eventhandling.js"></script>
+</body>
+</html></textarea><div class="cap">eventhandling.js</div><textarea class="code">// =========================================
+// Button Click Event
+// =========================================
+const button = document.getElementById("clickButton");
+button.addEventListener("click", function ()
+{
+document.getElementById("buttonMessage").innerHTML =
+"Button was clicked successfully!";
+});
+
+// =========================================
+// Form Submission Event
+// =========================================
+const form = document.getElementById("studentForm");
+form.addEventListener("submit", function(event)
+{
+event.preventDefault();
+let name = document.getElementById("studentName").value;
+document.getElementById("formMessage").innerHTML =
+"Welcome " + name + "! Form submitted successfully.";
+});
+
+// =========================================
+// Keyboard Event
+// =========================================
+const inputBox = document.getElementById("keyboardInput");
+inputBox.addEventListener("keyup",
+function(event) {
+document.getElementById("keyboardMessage").innerHTML =
+"Last key pressed: " + event.key;
+});</textarea><textarea data-skip="1" hidden>/* eventhandling.html (body) */
+<h1>JavaScript Event Handling</h1><hr>
+<h2>Button Click Event</h2>
+<button id="clickButton">Click Me</button>
+<p id="buttonMessage"></p><hr>
+<h2>Form Submission Event</h2>
+<form id="studentForm">
+  <label>Name:</label> <input type="text" id="studentName" required><br><br>
+  <input type="submit" value="Submit">
+</form>
+<p id="formMessage"></p><hr>
+<h2>Keyboard Event</h2>
+<input type="text" id="keyboardInput" placeholder="Type something here">
+<p id="keyboardMessage"></p>
+<script src="eventhandling.js"></script>
+
+/* eventhandling.js */
+const button = document.getElementById("clickButton");
+button.addEventListener("click", function () {
+  document.getElementById("buttonMessage").innerHTML = "Button was clicked successfully!";
+});
+
+const form = document.getElementById("studentForm");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  let name = document.getElementById("studentName").value;
+  document.getElementById("formMessage").innerHTML = "Welcome " + name + "! Form submitted successfully.";
+});
+
+const inputBox = document.getElementById("keyboardInput");
+inputBox.addEventListener("keyup", function (event) {
+  document.getElementById("keyboardMessage").innerHTML = "Last key pressed: " + event.key;
+});</textarea>
+<p class="out">Click → “Button was clicked successfully!” · Submit → “Welcome StudentName! Form submitted successfully.” · Key press → “Last key pressed: A”.</p>
+<p class="ap">Interactive buttons, registration and login forms, search boxes, keyboard-controlled applications.</p></div>
+
+<div data-ex="7" data-title="DOM Manipulation Using JavaScript" data-pg="45">
+<p class="aim">To perform DOM manipulation with JavaScript to dynamically update webpage content, styles and elements.</p>
+<p class="th">The DOM (Document Object Model) represents an HTML document as a tree of objects. Methods used: <code>getElementById()</code>, <code>createElement()</code>, <code>appendChild()</code>, <code>removeChild()</code>. The program changes text, changes styles, creates an element, adds it to a list and removes an element.</p>
+<ol class="st"><li>Create a page with headings, paragraph, buttons and a list.</li><li>Create an external JS file.</li><li>Access elements with DOM methods.</li><li>Modify text content.</li><li>Change CSS styles dynamically.</li><li>Create and append a new element.</li><li>Remove an existing element.</li><li>Run in a browser.</li></ol>
+<textarea class="code">/* dommanipulation.html (body) */
+<h1 id="title">JavaScript DOM Manipulation</h1>
+<p id="paragraph">This paragraph will be modified using JavaScript.</p>
+<button id="changeText">Change Text</button>
+<button id="changeStyle">Change Style</button>
+<button id="addElement">Add New Item</button>
+<button id="removeElement">Remove Last Item</button>
+<hr><h2>Programming Languages</h2>
+<ul id="languageList"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+<script src="dommanipulation.js"></script>
+
+/* dommanipulation.js */
+document.getElementById("changeText").addEventListener("click", function () {
+  document.getElementById("paragraph").textContent =
+    "The paragraph content has been updated using JavaScript.";
+});
+document.getElementById("changeStyle").addEventListener("click", function () {
+  let title = document.getElementById("title");
+  title.style.color = "blue";
+  title.style.backgroundColor = "lightyellow";
+  title.style.padding = "10px";
+  title.style.border = "2px solid black";
+});
+document.getElementById("addElement").addEventListener("click", function () {
+  let newItem = document.createElement("li");
+  newItem.textContent = "React";
+  document.getElementById("languageList").appendChild(newItem);
+});
+document.getElementById("removeElement").addEventListener("click", function () {
+  let list = document.getElementById("languageList");
+  if (list.lastElementChild) { list.removeChild(list.lastElementChild); }
+});</textarea>
+<p class="out">Initially: HTML, CSS, JavaScript. After “Add New Item”: HTML, CSS, JavaScript, React. “Change Text” and “Change Style” modify the page dynamically.</p>
+<p class="ap">Dynamic page updates, dashboards, menus, shopping carts, to-do lists, interactive forms.</p></div>
+
+<div data-ex="8" data-title="Form Validation Using JavaScript" data-pg="50">
+<p class="aim">To create a simple form validation system using JavaScript to validate user inputs.</p>
+<p class="th">Form validation checks that user data meets predefined rules before processing. Rules: Name must not be empty; Email must contain @ and .; Password at least 6 characters; Age between 18 and 60.</p>
+<ol class="st"><li>Create a form with Name, Email, Password, Age.</li><li>Link an external JS file.</li><li>Capture the submit event.</li><li>Validate each field.</li><li>Show an error message on failure.</li><li>Show a success message if all are valid.</li><li>Run in a browser.</li></ol>
+<textarea class="code">/* formvalidation.html (body) */
+<h1>Student Registration Form</h1>
+<form id="registrationForm">
+  <label for="name">Name:</label><br><input type="text" id="name" placeholder="Enter your name"><br><br>
+  <label for="email">Email:</label><br><input type="email" id="email" placeholder="Enter your email"><br><br>
+  <label for="password">Password:</label><br><input type="password" id="password" placeholder="Enter your password"><br><br>
+  <label for="age">Age:</label><br><input type="number" id="age" placeholder="Enter your age"><br><br>
+  <input type="submit" value="Register">
+</form>
+<h3 id="message"></h3>
+<script src="formvalidation.js"></script>
+
+/* formvalidation.js */
+const form = document.getElementById("registrationForm");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value;
+  let age = document.getElementById("age").value;
+  let message = document.getElementById("message");
+  message.style.color = "red";
+  message.innerHTML = "";
+  if (name === "") { message.innerHTML = "Name cannot be empty."; return; }
+  if (!email.includes("@") || !email.includes(".")) { message.innerHTML = "Enter a valid email address."; return; }
+  if (password.length < 6) { message.innerHTML = "Password must contain at least 6 characters."; return; }
+  if (age < 18 || age > 60) { message.innerHTML = "Age must be between 18 and 60."; return; }
+  message.style.color = "green";
+  message.innerHTML = "Registration Successful!";
+});</textarea>
+<p class="out">Empty name → “Name cannot be empty.” · Bad email → “Enter a valid email address.” · Short password → “Password must contain at least 6 characters.” · Bad age → “Age must be between 18 and 60.” · Valid → “Registration Successful!”</p>
+<p class="ap">Student registration, login/signup forms, online exams, e-commerce registration, banking forms, online applications.</p></div>
+
+<div data-ex="9" data-title="Calculator Application (React)" data-pg="55">
+<p class="aim">To develop a simple Calculator Application that performs addition, subtraction, multiplication and division.</p>
+<p class="th">A calculator accepts numeric input and applies operators to produce a result. This implementation uses React's <code>useState()</code> to keep the input. <code>handleClick()</code> appends values, <code>calculateResult()</code> evaluates the expression and <code>clearInput()</code> clears the display. Buttons: digits, + − * /, C, =.</p>
+<ol class="st"><li>Create the project: <code>npm create vite@latest router-app</code></li><li>Select React and JavaScript.</li><li><code>cd router-app</code></li><li>Update App.jsx (below).</li><li><code>npm run dev</code></li></ol>
+<textarea class="code">import { useState } from "react";
+
+function App() {
+  const [input, setInput] = useState("");
+  const handleClick = (value) => { setInput(input + value); };
+  const calculateResult = () => {
+    try {
+      const result = Function("return " + input)();
+      setInput(result.toString());
+    } catch (error) { setInput("Error"); }
+  };
+  const clearInput = () => { setInput(""); };
+
+  return (
+    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+      <h2>Simple Calculator</h2>
+      <input type="text" value={input} style={{ width: "200px", height: "30px", marginBottom: "10px" }} />
+      <div>
+        <button onClick={() => handleClick("1")}>1</button>
+        <button onClick={() => handleClick("2")}>2</button>
+        <button onClick={() => handleClick("3")}>3</button>
+        <button onClick={() => handleClick("+")}>+</button>
+      </div>
+      <div>
+        <button onClick={() => handleClick("4")}>4</button>
+        <button onClick={() => handleClick("5")}>5</button>
+        <button onClick={() => handleClick("6")}>6</button>
+        <button onClick={() => handleClick("-")}>-</button>
+      </div>
+      <div>
+        <button onClick={() => handleClick("7")}>7</button>
+        <button onClick={() => handleClick("8")}>8</button>
+        <button onClick={() => handleClick("9")}>9</button>
+        <button onClick={() => handleClick("*")}>*</button>
+      </div>
+      <div>
+        <button onClick={clearInput}>C</button>
+        <button onClick={() => handleClick("0")}>0</button>
+        <button onClick={calculateResult}>=</button>
+        <button onClick={() => handleClick("/")}>/</button>
+      </div>
+    </div>
+  );
+}
+export default App;</textarea>
+<p class="out">Input: 12 + 5 → Output: 17</p>
+<p class="ap">Basic arithmetic, educational calculators, point-of-sale, financial and scientific applications, React-based interactive apps.</p></div>
+
+<div data-ex="10" data-title="Counter Application Using React" data-pg="59">
+<p class="aim">To develop a simple Counter Application that increments, decrements, doubles and resets a counter value.</p>
+<p class="th">React is a JavaScript library for component-based UIs; data is kept in state. The <code>useState()</code> hook stores the counter in the <code>number</code> variable. Operations: Increment (+1), Decrement (−1 when &gt; 0), Double (×2), Reset (0).</p>
+<ol class="st"><li><code>npm create vite@latest counterApp</code></li><li>Select React and JavaScript.</li><li><code>cd counterApp</code> then <code>npm install</code></li><li>Create CounterApp.jsx and update App.jsx.</li><li><code>npm run dev</code></li></ol>
+<textarea class="code">// CounterApp.jsx
+import React, { useState, useEffect } from 'react';
+
+const CounterApp = () => {
+  const [number, setNumber] = useState(0);
+  // useEffect(() => { const initialCountFromServer = 50; setNumber(initialCountFromServer); }, []);
+  const increment = () => { setNumber(number + 1); };
+  const decrement = () => { if (number > 0) setNumber(number - 1); };
+  const reset = () => { setNumber(0); };
+  const double = () => { setNumber(number * 2); };
+  return (
+    <div>
+      <h1>Number Counter</h1>
+      <h2>{number}</h2>
+      <br />
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+      <button onClick={double}>Double</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+};
+export default CounterApp;
+
+// App.jsx
+import CounterApp from './CounterApp'
+function App() { return (<><CounterApp/></>) }
+export default App</textarea>
+<p class="out">Initial 0 → Increment 1 → Increment 2 → Double 4 → Decrement 3 → Reset 0.</p>
+<p class="ap">Digital counters, quantity selectors, voting systems, score counters, shopping-cart quantity controls.</p></div>
+
+<div data-ex="11" data-title="Router Application Using React (OR Props, State and Hooks)" data-pg="67">
+<p class="aim">To develop a Router Application with React Router that navigates between Home, About and Contact pages without a full page reload.</p>
+<p class="th">React Router provides client-side routing. Components: <b>BrowserRouter</b> (routing capability), <b>Routes</b> (route definitions), <b>Route</b> (path → component), <b>Link</b> (navigation).</p>
+<ol class="st"><li><code>npm create vite@latest router-app</code>; select React and JavaScript; <code>cd router-app</code>; <code>npm install</code></li><li><code>npm install react-router-dom</code></li><li>Update main.jsx to wrap App in BrowserRouter.</li><li>Create Home.jsx, About.jsx, Contact.jsx in a Pages folder in src.</li><li>Update App.jsx with Links and Routes.</li><li><code>npm run dev</code></li></ol>
+<textarea class="code">// main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter><App /></BrowserRouter>
+);
+
+// Pages/Home.jsx  (About.jsx and Contact.jsx are identical in shape)
+function Home() { return <h2>Home Page</h2>; }
+export default Home;
+
+// App.jsx
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+function App() {
+  return (
+    <div>
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/about">About</Link> |{" "}
+        <Link to="/contact">Contact</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
+  );
+}
+export default App;</textarea>
+<p class="out">“Home | About | Contact” with Home Page shown first; selecting About or Contact shows that page without a full browser refresh.</p>
+<div class="cap">(OR) Experiment 11: Props, State and Hooks (useState, useEffect)</div>
+<p class="th"><b>Aim:</b> A React counter using props, state and hooks that increments/decrements and updates the webpage title dynamically. <b>Algorithm:</b> import useState and useEffect; create a Counter component taking a <code>label</code> prop; init <code>count</code> to 0; use useEffect to update the tab title when count changes; display label and count; add Increment and Decrement buttons; render Counter from App with a label; verify counter and title update.</p>
+<textarea class="code">import { useState, useEffect } from "react";
+
+function Counter(props) {
+  const [count, setCount] = useState(0);
+  useEffect(() => { document.title = `Count: ${count}`; }, [count]);
+  return (
+    <div>
+      <h2>{props.label}</h2>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  );
+}
+function App() { return <Counter label="My Counter" />; }</textarea>
+<p class="ap">Multi-page websites, portfolios, e-commerce, student management systems, dashboards, Single Page Applications.</p></div>
+
+<div data-ex="12" data-title="React with Routing + Bootstrap UI" data-pg="73">
+<p class="aim">To develop a React application using React Router and Bootstrap for a responsive UI with seamless navigation between Home, About and Contact pages without reloading.</p>
+<ol class="st"><li>Create a React app; install react-router-dom and Bootstrap.</li><li>Import BrowserRouter, Routes, Route, Link and the Bootstrap CSS.</li><li>Create Home, About, Contact functional components.</li><li>Wrap the app in BrowserRouter.</li><li>Design a responsive navbar with Bootstrap classes.</li><li>Add Link entries for each page.</li><li>Define routes with Routes and Route.</li><li>Map /, /about and /contact to their components.</li><li>Run the app.</li><li>Verify navigation works without refresh and Bootstrap styling applies.</li></ol>
+<textarea class="code">// App.js
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function Home()    { return <div className="container mt-4"><h2>Home Page</h2></div>; }
+function About()   { return <div className="container mt-4"><h2>About Page</h2></div>; }
+function Contact() { return <div className="container mt-4"><h2>Contact Page</h2></div>; }
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <span className="navbar-brand">My App</span>
+        <div className="navbar-nav">
+          <Link className="nav-link text-white" to="/">Home</Link>
+          <Link className="nav-link text-white" to="/about">About</Link>
+          <Link className="nav-link text-white" to="/contact">Contact</Link>
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  );
+}
+export default App;</textarea>
+<p class="out">Bootstrap dark navbar “My App · Home · About · Contact”; each page loads with no full refresh.</p>
+<p class="ap">Multi-page websites, portfolios, e-commerce, student management systems, dashboards, SPAs.</p></div>
+</div>
+
+<script>
+(function(){
+  var RUB='Evaluation Rubrics — Write-up &amp; Execution (Max 20): A(5) B(5) C(5) D(5) · Viva (Max 5): E(3) F(2) · Total 25 · Signature of the Lab In-charge';
+  var exps=document.getElementById('exps');
+  var items=[].slice.call(document.querySelectorAll('#src > div'));
+  items.forEach(function(d){
+    var s=document.createElement('section');
+    var id='ex'+d.dataset.ex.replace(/\W+/g,'-');
+    s.id=id;s.dataset.t='Ex '+d.dataset.ex+': '+d.dataset.title.split(' (')[0];s.dataset.g='Experiments';
+    var h='<span class="pg">Page '+d.dataset.pg+'</span><h2>Experiment '+d.dataset.ex+'</h2><h3 style="margin-top:0">'+d.dataset.title+'</h3>';
+    s.innerHTML=h;
+    var ph={aim:'Aim',th:'Theory',st:'Procedure / Algorithm'};
+    [].slice.call(d.children).forEach(function(el){
+      if(el.tagName==='TEXTAREA'){if(el.dataset.skip)return;var p=document.createElement('pre'),c=document.createElement('code');c.textContent=el.value;p.appendChild(c);s.appendChild(p);return}
+      var k=el.className;
+      if(ph[k]){var c=document.createElement('div');c.className='cap';c.textContent=ph[k];s.appendChild(c)}
+      if(k==='out'){var c=document.createElement('div');c.className='cap';c.textContent='Expected Output';s.appendChild(c)}
+      if(k==='ap'){var c=document.createElement('div');c.className='cap';c.textContent='Application';s.appendChild(c)}
+      s.appendChild(el.cloneNode(true));
+    });
+    var r=document.createElement('div');r.className='rub';r.innerHTML=RUB;s.appendChild(r);
+    exps.appendChild(s);
+  });
+  document.getElementById('c1').remove();
+  // sidebar
+  var side=document.getElementById('side'),last='';
+  [].slice.call(document.querySelectorAll('main section')).forEach(function(s){
+    if(s.dataset.g!==last){last=s.dataset.g;var h=document.createElement('h4');h.textContent=last;side.appendChild(h)}
+    var a=document.createElement('a');a.href='#'+s.id;a.innerHTML=s.dataset.t;
+    a.onclick=function(){side.classList.remove('open')};side.appendChild(a);
+  });
+  document.getElementById('menu').onclick=function(){side.classList.toggle('open')};
+  var demo=document.getElementById('demo');
+  document.getElementById('demoBtn').onclick=function(){demo.classList.toggle('open')};
+  // Button Click Event
+  document.getElementById('clickButton').addEventListener('click',function(){
+    document.getElementById('buttonMessage').innerHTML='Button was clicked successfully!';
+  });
+  // Form Submission Event
+  document.getElementById('studentForm').addEventListener('submit',function(event){
+    event.preventDefault();
+    var name=document.getElementById('studentName').value;
+    document.getElementById('formMessage').textContent='Welcome '+name+'! Form submitted successfully.';
+  });
+  // Keyboard Event
+  document.getElementById('keyboardInput').addEventListener('keyup',function(event){
+    document.getElementById('keyboardMessage').textContent='Last key pressed: '+event.key;
+  });
+})();
+</script>
+</body></html>
